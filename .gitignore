@@ -1,3 +1,4 @@
 Dockerfile.smallest
 bkp/
 mysql/
+node_modules/
