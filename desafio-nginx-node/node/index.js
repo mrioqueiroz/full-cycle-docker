@@ -15,16 +15,20 @@ connection.query(`CREATE TABLE IF NOT EXISTS people(name VARCHAR(100));`)
 connection.query(`INSERT INTO people(name) VALUES('${name}');`)
 
 var result;
-connection.query(`SELECT name FROM people WHERE name = '${name}' LIMIT 1;`, function(err, rows) {
+connection.query(`SELECT name FROM people;`, function(err, rows) {
     if(err) throw err;
     else {
-        result = rows[0].name
+        result = rows
     }
 });
 connection.end()
 
 app.get("/", (req, res) => {
-    res.send(`<h1>Full Cycle</h1><h2>${result}</h2>`)
+    var names = "";
+    for(var user in result) {
+        names += `<h2>- ${result[user].name}</h2>`
+    }
+    res.send(`<h1>Full Cycle Rocks!</h1>${names}`)
 })
 
 app.listen(port, ()=> {
