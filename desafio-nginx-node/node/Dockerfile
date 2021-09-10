@@ -13,4 +13,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 RUN npm ci
 
+RUN chown -R node:users node_modules
+
+USER node
+
 EXPOSE 3000
